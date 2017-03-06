@@ -2,6 +2,7 @@ package hu.bme.mit.train.controller;
 
 import java.util.Date;
 
+import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
 
 import hu.bme.mit.train.interfaces.TrainController;
@@ -15,9 +16,15 @@ public class TrainControllerImpl implements TrainController {
 	private int id = 0; 
 	
 	public void tableSave() {
+		if (tachograph == null)
+			tachograph = HashBasedTable.create();
 		tachograph.put(id, 0, (int) (new Date().getTime()/1000));
 		tachograph.put(id, 1, step);
-		tachograph.put(id++, 2, referenceSpeed);		
+		tachograph.put(id++, 2, referenceSpeed);
+	}
+	
+	public int tableSize(){
+		return tachograph.size();
 	}
 
 	@Override

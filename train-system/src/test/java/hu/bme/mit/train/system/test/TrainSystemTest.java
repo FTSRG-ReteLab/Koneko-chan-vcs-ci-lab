@@ -1,5 +1,7 @@
 package hu.bme.mit.train.system.test;
 
+import java.util.concurrent.TimeUnit;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -54,6 +56,20 @@ public class TrainSystemTest {
 	public void test3() {
 		user.overrideJoystickPosition(6);
 		Assert.assertEquals(6, user.getJoystickPosition());
+	}
+	
+	@Test
+	public void test4() {
+		controller.tableSave();
+		try {
+			TimeUnit.SECONDS.sleep(2);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		controller.tableSave();
+		controller.tableSave();
+		Assert.assertNotEquals(0, controller.tableSize());
 	}
 
 	
