@@ -1,0 +1,4 @@
+language: java
+gradle check
+./gradlew check
+gradle assemble
